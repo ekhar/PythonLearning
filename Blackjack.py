@@ -2,10 +2,11 @@
 
 import random
 
+
 # Setup Bankroll
 
 class Bankroll:
-    def __init__(self, bet, money = 0):
+    def __init__(self, bet, money=0):
         self.bet = bet
         self.money = money
 
@@ -37,7 +38,7 @@ game_cards = [
 # Determine Points Held by Each Player
 
 class Players:
-    def __init__(self,card1, card2, card3='', card4=''):
+    def __init__(self, card1, card2, card3='', card4=''):
         self.card1 = card1
         self.card2 = card2
         self.card3 = card3
@@ -76,16 +77,20 @@ pcard4 = random.choice(game_cards)
 dealercards = Players(dcard1, dcard2)
 playercards = Players(pcard1, pcard2)
 
-#Start The Game
+
+# Start The Game
 
 class Winlose:
-    def __init__(self,wins = 0, loss = 0):
+    def __init__(self, wins=0, loss=0):
         self.wins = wins
         self.loss = loss
+
     def lossgain(self):
         self.loss += 1
+
     def wingain(self):
         self.wins += 1
+
 
 record = Winlose()
 
@@ -95,11 +100,13 @@ wager = int(input("Ok {}, let's play a game of blackjack. How much money would y
 
 playerbank = Bankroll(wager)
 
+
 def losingsequence():
     global replay
     playerbank.lose()
     record.lossgain()
-    print("My score is {}, and your score is {}. This means that I win!".format(dealercards.total_value(),playercards.total_value()))
+    print("My score is {}, and your score is {}. This means that I win!".format(dealercards.total_value(),
+                                                                                playercards.total_value()))
     print("You have lost ${}. Your total money is now ${}".format(wager, playerbank.money))
     print("You have lost {} games and won {} games.".format(record.loss, record.wins))
     replay = input('Would you like to play again? (yes/no)')
@@ -109,7 +116,8 @@ def winningsequence():
     global replay
     playerbank.win()
     record.wingain()
-    print("My score is {} and your's is {}. This means that you win!".format(dealercards.total_value(),playercards.total_value()))
+    print("My score is {} and your's is {}. This means that you win!".format(dealercards.total_value(),
+                                                                             playercards.total_value()))
     print("You have won ${}. Your total money is now ${}".format(wager, playerbank.money))
     print("You have lost {} games and won {} games.".format(record.loss, record.wins))
     replay = input('Would you like to play again? (yes/no)')
@@ -134,9 +142,9 @@ def blackjacksequence():
     print("You have lost {} games and won {} games.".format(record.loss, record.wins))
     replay = input('Would you like to play again? (yes/no)')
 
-def blackjack():
 
-    print('{}, here are your two face up cards: the {} of spades and the {} of diamonds '.format(name,pcard1,pcard2))
+def blackjack():
+    print('{}, here are your two face up cards: the {} of spades and the {} of diamonds '.format(name, pcard1, pcard2))
 
     print("My one faceup card is the {} of hearts".format(dcard1))
 
@@ -168,7 +176,7 @@ def blackjack():
             playercards.card3 = pcard3
             print(
                 "Your cards are the {} of spades, the {} of diamonds, and the {} of spades. "
-                "My two face up cards are the {} and the {}".format(pcard1,pcard2,pcard3,dcard1,dcard2)
+                "My two face up cards are the {} and the {}".format(pcard1, pcard2, pcard3, dcard1, dcard2)
             )
             if playercards.total_value() > 21:
                 losingsequence()
@@ -176,7 +184,8 @@ def blackjack():
             elif playercards.total_value() == 21:
                 blackjacksequence()
 
-            elif playercards.total_value() < 21 and playercards.card1_value() + playercards.card2_value() == 10 and pcard3 == 'Ace':
+            elif playercards.total_value() < 21 and playercards.card1_value() + \
+                    playercards.card2_value() == 10 and pcard3 == 'Ace':
                 blackjacksequence()
 
             elif playercards.total_value() < 21:
@@ -190,12 +199,13 @@ def blackjack():
                 elif playercards.total_value() == 21:
                     blackjacksequence()
 
-                elif playercards.total_value() < 21 and playercards.card1_value() + playercards.card2_value() == 10 and pcard3 == 'Ace':
+                elif playercards.total_value() < 21 and playercards.card1_value()\
+                        + playercards.card2_value() == 10 and pcard3 == 'Ace':
                     blackjacksequence()
 
                 elif playercards.total_value() < 21:
 
-                    if dealercards.total_value() >21:
+                    if dealercards.total_value() > 21:
                         winningsequence()
 
                     elif dealercards.total_value() > playercards.total_value():
@@ -213,10 +223,10 @@ def blackjack():
                 dealercards.card4 = dcard4
 
                 print("Your cards are the {} of spades, the {} of diamonds, the {} of diamonds, "
-                      "and now the {} of clubs.".format(pcard1,pcard2,pcard3,pcard4))
+                      "and now the {} of clubs.".format(pcard1, pcard2, pcard3, pcard4))
 
                 print("My face up cards are the {} of hearts, the {} of clubs, "
-                      "and now the {} of hearts".format(dcard1,dcard2,dcard3,dcard4))
+                      "and now the {} of hearts".format(dcard1, dcard2, dcard3, dcard4))
 
                 if playercards.total_value() > 21:
                     losingsequence()
@@ -224,7 +234,8 @@ def blackjack():
                 elif playercards.total_value() == 21:
                     blackjacksequence()
 
-                elif playercards.total_value() < 21 and playercards.card1_value() + playercards.card2_value() + pcard3 == 10 and pcard4 == 'Ace':
+                elif playercards.total_value() < 21 and playercards.card1_value() + \
+                        playercards.card2_value() + pcard3 == 10 and pcard4 == 'Ace':
                     blackjacksequence()
 
                 elif playercards.total_value() < 21:
@@ -242,22 +253,15 @@ def blackjack():
                         tiesequence()
 
 
-
-
 blackjack()
 
 while replay == 'yes':
     dcard1 = random.choice(game_cards)
     dcard2 = random.choice(game_cards)
-    dcard3 = random.choice(game_cards)
-    dcard4 = random.choice(game_cards)
-
     pcard1 = random.choice(game_cards)
     pcard2 = random.choice(game_cards)
-    pcard3 = random.choice(game_cards)
-    pcard4 = random.choice(game_cards)
-    blackjack()
 
+    blackjack()
 
 # Detect for Blackjack
 # Hit or Settle Option
